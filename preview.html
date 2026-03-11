@@ -1,0 +1,55 @@
+<input type="file" id="fileInput" />
+<button onclick="upload()">Upload</button>
+
+<script>
+  async function upload() {
+    const fileInput = document.getElementById("fileInput");
+    const file = fileInput.files[0];
+    if (!file) {
+      alert("Please select a file first");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const res = await fetch("http://127.0.0.1:8000/upload-csv", {
+        method: "POST",
+        body: formData
+      });
+
+      if (!res.ok) {
+        const errorDetail = await res.json().catch(() => ({ detail: res.statusText }));
+        alert(`Error: ${errorDetail.detail || "Upload failed"}`);
+        return;
+      }
+
+      const contentType = res.headers.get("content-type") || "";
+
+      if (contentType.includes("spreadsheetml") || contentType.includes("excel")) {
+        const blob = await res.blob();
+        const url = window.URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.style.display = "none";
+        a.href = url;
+        a.download = "faulty_data.xlsx";
+        document.body.appendChild(a);
+        a.click();
+
+        // Cleanup
+        setTimeout(() => {
+          document.body.removeChild(a);
+          window.URL.revokeObjectURL(url);
+        }, 100);
+      } else {
+        const json = await res.json();
+        alert(json.message);
+      }
+    } catch (error) {
+      console.error("Upload Error:", error);
+      alert("Network error or CORS issue. Check the console for details.");
+    }
+  }
+</script>
