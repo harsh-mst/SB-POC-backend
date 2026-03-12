@@ -8,10 +8,31 @@ from sqlalchemy.orm import Session
 from .models import CleanData, FaultyData
 from fastapi.responses import Response, StreamingResponse
 import io
+import traceback
+import logging
+from sqlalchemy import cast, String
+import logging
 from fastapi.middleware.cors import CORSMiddleware
+from . import schema as orders_schema_mod
 from .schema import orders_schema
 
+# Configure logging to a file
+logging.basicConfig(
+    filename='app_errors.log',
+    level=logging.ERROR,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+
 app = FastAPI()
+
+@app.middleware("http")
+async def log_exceptions_middleware(request, call_next):
+    try:
+        return await call_next(request)
+    except Exception as e:
+        error_msg = traceback.format_exc()
+        logging.error(f"Error handling request {request.url}: {error_msg}")
+        raise e
 
 app.add_middleware(
     CORSMiddleware,
@@ -40,23 +61,30 @@ async def upload_csv(
     file: UploadFile = File(...),
     encoding: str = Query("latin1")):
 
-    if not file.filename.lower().endswith(".csv"):
-        raise HTTPException(status_code=400, detail="only csv files allowed")
+    allowed_extensions = {".csv", ".xlsx", ".xls"}
+    file_extension = file.filename.lower()[file.filename.rfind("."):]
+    
+    if file_extension not in allowed_extensions:
+        raise HTTPException(status_code=400, detail="only csv, xlsx, or xls files allowed")
 
     contents = await file.read()
     buffer = BytesIO(contents)
 
     try:
-        df = pd.read_csv(buffer, encoding=encoding)
+        if file_extension == ".csv":
+            df = pd.read_csv(buffer, encoding=encoding)
+        else:
+            # For Excel files, use read_excel
+            df = pd.read_excel(buffer)
     except Exception as e:
-        raise HTTPException(status_code=400, detail=f"CSV read error {e}")
+        raise HTTPException(status_code=400, detail=f"File read error {e}")
 
     finally:
         buffer.close()
         await file.close()
 
     if df.empty:
-        raise HTTPException(status_code=400, detail="CSV has no rows")
+        raise HTTPException(status_code=400, detail="Uploaded file has no rows")
 
     df["ORDERDATE"] = pd.to_datetime(df["ORDERDATE"], errors="coerce")
 
@@ -69,11 +97,12 @@ async def upload_csv(
         "QTR_ID",
         "MONTH_ID",
         "YEAR_ID",
-        "MSRP"
+        "MSRP",
+        "POSTALCODE"
     ]
 
     # Use Int64 for integer columns to handle NaNs correctly for Pandera
-    int_cols = ["ORDERNUMBER", "QUANTITYORDERED", "ORDERLINENUMBER", "QTR_ID", "MONTH_ID", "YEAR_ID"]
+    int_cols = ["ORDERNUMBER", "QUANTITYORDERED", "ORDERLINENUMBER", "QTR_ID", "MONTH_ID", "YEAR_ID", "POSTALCODE"]
 
     for col in numeric_cols:
         df[col] = pd.to_numeric(df[col], errors="coerce")
@@ -82,20 +111,46 @@ async def upload_csv(
 
 
     try:
+        # Initial validation to separate clean/faulty
         validate_df = orders_schema.validate(df, lazy=True)
-        validate_df.to_sql(
-            "clean_data",
-            con=engine,
-            if_exists="replace",
-            index=False
-        )
+        
+        # --- DUPLICATE CHECK FOR ALL-CLEAN CASE ---
+        existing_orders = pd.read_sql(
+            "SELECT \"ORDERNUMBER\" FROM clean_data", 
+            con=engine
+        )["ORDERNUMBER"].tolist()
+        
+        is_duplicate = validate_df["ORDERNUMBER"].isin(existing_orders)
+        actual_clean_df = validate_df[~is_duplicate].copy()
+        duplicate_df = validate_df[is_duplicate].copy()
+        
+        if not actual_clean_df.empty:
+            actual_clean_df.to_sql(
+                "clean_data",
+                con=engine,
+                if_exists="append",
+                index=False
+            )
 
-        return {
-            "message": "CSV validated successfully",
-            "total_rows": len(df),
-            "valid_rows": len(validate_df),
-            "faulty_rows": 0
-        }
+        if duplicate_df.empty:
+            return {
+                "message": "File validated successfully",
+                "total_rows": len(df),
+                "valid_rows": len(actual_clean_df),
+                "faulty_rows": 0
+            }
+        else:
+            # If there are duplicates, we treat them as faulty
+            duplicate_df.insert(0, "VALIDATION_ERRORS", "Duplicate ORDERNUMBER")
+            excel_buffer = io.BytesIO()
+            duplicate_df.to_excel(excel_buffer, index=False, engine="openpyxl")
+            return Response(
+                content=excel_buffer.getvalue(),
+                media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                headers={
+                    "Content-Disposition": "attachment; filename=faulty_data_with_duplicates.xlsx"
+                }
+            )
 
     except pa.errors.SchemaErrors as err:
         failure_cases = err.failure_cases
@@ -131,6 +186,22 @@ async def upload_csv(
         faulty_df = df.loc[error_rows].copy()
         clean_df = df.drop(index=error_rows).copy()
 
+        # --- DUPLICATE CHECK ---
+        if not clean_df.empty:
+            existing_orders = pd.read_sql(
+                "SELECT \"ORDERNUMBER\" FROM clean_data", 
+                con=engine
+            )["ORDERNUMBER"].tolist()
+            
+            is_duplicate = clean_df["ORDERNUMBER"].isin(existing_orders)
+            duplicate_df = clean_df[is_duplicate].copy()
+            clean_df = clean_df[~is_duplicate].copy()
+            
+            if not duplicate_df.empty:
+                duplicate_df.insert(0, "VALIDATION_ERRORS", "Duplicate ORDERNUMBER")
+                faulty_df = pd.concat([faulty_df, duplicate_df], ignore_index=True)
+        # ------------------------
+
         # Aggregate errors and insert as the FIRST column
         error_descriptions = [", ".join(error_map[idx]) for idx in error_rows]
         faulty_df.insert(0, "VALIDATION_ERRORS", error_descriptions)
@@ -139,7 +210,7 @@ async def upload_csv(
         clean_df.to_sql(
             "clean_data",
             con=engine,
-            if_exists="replace",
+            if_exists="append",
             index=False
         )
 
@@ -159,11 +230,20 @@ async def upload_csv(
 async def get_all_clean_data(
     page: int = Query(1, gte=1),
     limit: int = Query(10, gte=1),
+    search: str = Query(None),
     db: Session = Depends(get_db)
 ):
+    query = db.query(CleanData)
+
+    if search:
+        query = query.filter(
+            CleanData.CUSTOMERNAME.ilike(f"%{search}%") |
+            cast(CleanData.ORDERNUMBER, String).ilike(f"%{search}%")
+        )
+
+    total_count = query.count()
     offset = (page - 1) * limit
-    total_count = db.query(CleanData).count()
-    all_data = db.query(CleanData).offset(offset).limit(limit).all()
+    all_data = query.order_by(CleanData.ORDERNUMBER.asc()).offset(offset).limit(limit).all()
 
     return {
         "data": [row.__dict__ for row in all_data],
@@ -173,36 +253,115 @@ async def get_all_clean_data(
     }
 
 
-@app.get("/download/{data_type}")
-async def download_data(data_type: str, db: Session = Depends(get_db)):
-    if data_type == "clean":
-        query = db.query(CleanData).all()
-        filename = "clean_data.xlsx"
-    else:
-        raise HTTPException(status_code=400, detail="Invalid data type. Use 'clean' for downloading stored data.")
-
-    if not query:
-        raise HTTPException(status_code=404, detail=f"No {data_type} data found to download.")
-
-    # Convert to list of dicts, excluding SQLAlchemy internal state
-    data = []
-    for row in query:
-        row_dict = row.__dict__.copy()
-        row_dict.pop('_sa_instance_state', None)
-        data.append(row_dict)
-
-    df = pd.DataFrame(data)
+@app.post("/add-entry")
+async def add_entry(entry: orders_schema_mod.OrderItemCreate, db: Session = Depends(get_db)):
     
-    output = io.BytesIO()
-    with pd.ExcelWriter(output, engine='openpyxl') as writer:
-        df.to_excel(writer, index=False)
+    data_dict = entry.model_dump()
+    df = pd.DataFrame([data_dict])
     
-    output.seek(0)
     
-    return StreamingResponse(
-        output,
-        media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-        headers={"Content-Disposition": f"attachment; filename={filename}"}
-    )
+    int_cols = ["ORDERNUMBER", "QUANTITYORDERED", "ORDERLINENUMBER", "QTR_ID", "MONTH_ID", "YEAR_ID", "POSTALCODE"]
+    for col in int_cols:
+        if col in df.columns:
+            df[col] = pd.to_numeric(df[col], errors="coerce").astype("Int64")
 
+    try:
+       
+        validated_df = orders_schema.validate(df, lazy=True)
+        
+        # Check if record already exists
+        db_item = db.query(CleanData).filter(CleanData.ORDERNUMBER == int(entry.ORDERNUMBER)).first()
+        if db_item:
+            raise HTTPException(status_code=400, detail=f"Order number {entry.ORDERNUMBER} already exists")
+        
+        validated_df.to_sql(
+            "clean_data",
+            con=engine,
+            if_exists="append",
+            index=False
+        )
+        
+        return {
+            "message": "Entry added successfully",
+            "data": data_dict
+        }
+        
+    except pa.errors.SchemaErrors as err:
+        failure_cases = err.failure_cases
+        error_msgs = []
+        for _, row in failure_cases.iterrows():
+            error_msgs.append(f"{row['column']}: {row['check']}")
+            
+        raise HTTPException(
+            status_code=400,
+            detail={
+                "message": "Validation failed",
+                "errors": error_msgs
+            }
+        )
+
+
+
+@app.put("/edit-entry/{order_number}")
+async def edit_entry(order_number: int, entry: orders_schema_mod.OrderItemCreate, db: Session = Depends(get_db)):
+    # Check if record exists
+    db_item = db.query(CleanData).filter(CleanData.ORDERNUMBER == order_number).first()
+    if not db_item:
+        raise HTTPException(status_code=404, detail="Order not found")
+
+    # Convert Pydantic model to DataFrame for Pandera validation
+    data_dict = entry.model_dump()
+    df = pd.DataFrame([data_dict])
+    
+    # Pre-process types
+    int_cols = ["ORDERNUMBER", "QUANTITYORDERED", "ORDERLINENUMBER", "QTR_ID", "MONTH_ID", "YEAR_ID", "POSTALCODE"]
+    for col in int_cols:
+        if col in df.columns:
+            df[col] = pd.to_numeric(df[col], errors="coerce").astype("Int64")
+
+    try:
+        # Validate
+        orders_schema.validate(df, lazy=True)
+        
+        # Update database entry
+        for key, value in data_dict.items():
+            setattr(db_item, key, value)
+        
+        db.commit()
+        db.refresh(db_item)
+        
+        return {
+            "message": "Entry updated successfully",
+            "data": data_dict
+        }
+        
+    except pa.errors.SchemaErrors as err:
+        failure_cases = err.failure_cases
+        error_msgs = []
+        for _, row in failure_cases.iterrows():
+            error_msgs.append(f"{row['column']}: {row['check']}")
+            
+        raise HTTPException(
+            status_code=400,
+            detail={
+                "message": "Validation failed",
+                "errors": error_msgs
+            }
+        )
+
+
+@app.delete("/delete-entry/{order_number}")
+async def delete_entry(order_number: int, db: Session = Depends(get_db)):
+    # Check if record exists
+    db_item = db.query(CleanData).filter(CleanData.ORDERNUMBER == order_number).first()
+    if not db_item:
+        raise HTTPException(status_code=404, detail="Order not found")
+
+    # Delete the record
+    db.delete(db_item)
+    db.commit()
+
+    return {
+        "message": f"Entry with order number {order_number} deleted successfully"
+    }
 

@@ -1,0 +1,549 @@
+2026-03-11 16:04:06,911 - root - ERROR - Error handling request http://127.0.0.1:8000/upload-csv: Traceback (most recent call last):
+  File "C:\Users\DELL\Desktop\Db-Practice\src\main1.py", line 111, in upload_csv
+    validate_df = orders_schema.validate(df, lazy=True)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandera\api\pandas\container.py", line 117, in validate
+    return self._validate(
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandera\api\pandas\container.py", line 137, in _validate
+    return self.get_backend(check_obj).validate(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandera\backends\pandas\container.py", line 135, in validate
+    raise SchemaErrors(
+pandera.errors.SchemaErrors: {
+    "SCHEMA": {
+        "SERIES_CONTAINS_NULLS": [
+            {
+                "schema": null,
+                "column": "ORDERNUMBER",
+                "check": "not_nullable",
+                "error": "non-nullable series 'ORDERNUMBER' contains null values:2        <NA>8        <NA>65       <NA>95       <NA>119      <NA>         ... 49966    <NA>49967    <NA>49985    <NA>49995    <NA>49997    <NA>Name: ORDERNUMBER, Length: 2500, dtype: Int64"
+            },
+            {
+                "schema": null,
+                "column": "QUANTITYORDERED",
+                "check": "not_nullable",
+                "error": "non-nullable series 'QUANTITYORDERED' contains null values:3        <NA>19       <NA>22       <NA>30       <NA>56       <NA>         ... 49962    <NA>49969    <NA>49977    <NA>49980    <NA>49995    <NA>Name: QUANTITYORDERED, Length: 2500, dtype: Int64"
+            },
+            {
+                "schema": null,
+                "column": "PRICEEACH",
+                "check": "not_nullable",
+                "error": "non-nullable series 'PRICEEACH' contains null values:37      NaN68      NaN75      NaN109     NaN142     NaN         ..49940   NaN49968   NaN49971   NaN49993   NaN49999   NaNName: PRICEEACH, Length: 2500, dtype: float64"
+            },
+            {
+                "schema": null,
+                "column": "ORDERLINENUMBER",
+                "check": "not_nullable",
+                "error": "non-nullable series 'ORDERLINENUMBER' contains null values:26       <NA>56       <NA>69       <NA>82       <NA>97       <NA>         ... 49908    <NA>49917    <NA>49953    <NA>49970    <NA>49999    <NA>Name: ORDERLINENUMBER, Length: 2500, dtype: Int64"
+            },
+            {
+                "schema": null,
+                "column": "SALES",
+                "check": "not_nullable",
+                "error": "non-nullable series 'SALES' contains null values:25      NaN40      NaN57      NaN74      NaN99      NaN         ..49956   NaN49965   NaN49977   NaN49981   NaN49994   NaNName: SALES, Length: 2500, dtype: float64"
+            },
+            {
+                "schema": null,
+                "column": "ORDERDATE",
+                "check": "not_nullable",
+                "error": "non-nullable series 'ORDERDATE' contains null values:4       NaT16      NaT37      NaT55      NaT88      NaT         ..49940   NaT49943   NaT49947   NaT49954   NaT49968   NaTName: ORDERDATE, Length: 2500, dtype: datetime64[us]"
+            },
+            {
+                "schema": null,
+                "column": "STATUS",
+                "check": "not_nullable",
+                "error": "non-nullable series 'STATUS' contains null values:8        NaN20       NaN27       NaN77       NaN101      NaN        ... 49753    NaN49757    NaN49761    NaN49836    NaN49980    NaNName: STATUS, Length: 2500, dtype: str"
+            },
+            {
+                "schema": null,
+                "column": "QTR_ID",
+                "check": "not_nullable",
+                "error": "non-nullable series 'QTR_ID' contains null values:11       <NA>49       <NA>65       <NA>70       <NA>82       <NA>         ... 49822    <NA>49846    <NA>49856    <NA>49927    <NA>49960    <NA>Name: QTR_ID, Length: 2500, dtype: Int64"
+            },
+            {
+                "schema": null,
+                "column": "MONTH_ID",
+                "check": "not_nullable",
+                "error": "non-nullable series 'MONTH_ID' contains null values:2        <NA>13       <NA>24       <NA>28       <NA>44       <NA>         ... 49855    <NA>49861    <NA>49864    <NA>49901    <NA>49992    <NA>Name: MONTH_ID, Length: 2500, dtype: Int64"
+            },
+            {
+                "schema": null,
+                "column": "YEAR_ID",
+                "check": "not_nullable",
+                "error": "non-nullable series 'YEAR_ID' contains null values:11       <NA>29       <NA>33       <NA>48       <NA>54       <NA>         ... 49902    <NA>49931    <NA>49951    <NA>49964    <NA>49970    <NA>Name: YEAR_ID, Length: 2500, dtype: Int64"
+            },
+            {
+                "schema": null,
+                "column": "PRODUCTLINE",
+                "check": "not_nullable",
+                "error": "non-nullable series 'PRODUCTLINE' contains null values:18       NaN23       NaN43       NaN132      NaN140      NaN        ... 49932    NaN49949    NaN49970    NaN49972    NaN49981    NaNName: PRODUCTLINE, Length: 2500, dtype: str"
+            },
+            {
+                "schema": null,
+                "column": "MSRP",
+                "check": "not_nullable",
+                "error": "non-nullable series 'MSRP' contains null values:6       NaN23      NaN37      NaN65      NaN86      NaN         ..49968   NaN49973   NaN49978   NaN49981   NaN49991   NaNName: MSRP, Length: 2500, dtype: float64"
+            },
+            {
+                "schema": null,
+                "column": "PRODUCTCODE",
+                "check": "not_nullable",
+                "error": "non-nullable series 'PRODUCTCODE' contains null values:4        NaN7        NaN43       NaN50       NaN79       NaN        ... 49917    NaN49928    NaN49931    NaN49942    NaN49997    NaNName: PRODUCTCODE, Length: 2500, dtype: str"
+            },
+            {
+                "schema": null,
+                "column": "CUSTOMERNAME",
+                "check": "not_nullable",
+                "error": "non-nullable series 'CUSTOMERNAME' contains null values:22       NaN28       NaN44       NaN52       NaN95       NaN        ... 49905    NaN49955    NaN49976    NaN49992    NaN49995    NaNName: CUSTOMERNAME, Length: 2500, dtype: str"
+            },
+            {
+                "schema": null,
+                "column": "PHONE",
+                "check": "not_nullable",
+                "error": "non-nullable series 'PHONE' contains null values:45       NaN54       NaN107      NaN147      NaN155      NaN        ... 49953    NaN49959    NaN49973    NaN49997    NaN49998    NaNName: PHONE, Length: 2500, dtype: str"
+            },
+            {
+                "schema": null,
+                "column": "ADDRESSLINE1",
+                "check": "not_nullable",
+                "error": "non-nullable series 'ADDRESSLINE1' contains null values:12       NaN86       NaN115      NaN119      NaN146      NaN        ... 49899    NaN49944    NaN49947    NaN49954    NaN49979    NaNName: ADDRESSLINE1, Length: 2500, dtype: str"
+            },
+            {
+                "schema": null,
+                "column": "CITY",
+                "check": "not_nullable",
+                "error": "non-nullable series 'CITY' contains null values:25       NaN79       NaN90       NaN91       NaN156      NaN        ... 49949    NaN49956    NaN49960    NaN49964    NaN49968    NaNName: CITY, Length: 2500, dtype: str"
+            },
+            {
+                "schema": null,
+                "column": "COUNTRY",
+                "check": "not_nullable",
+                "error": "non-nullable series 'COUNTRY' contains null values:13       NaN20       NaN50       NaN100      NaN210      NaN        ... 49898    NaN49904    NaN49921    NaN49942    NaN49997    NaNName: COUNTRY, Length: 2500, dtype: str"
+            },
+            {
+                "schema": null,
+                "column": "CONTACTLASTNAME",
+                "check": "not_nullable",
+                "error": "non-nullable series 'CONTACTLASTNAME' contains null values:10       NaN21       NaN52       NaN118      NaN166      NaN        ... 49891    NaN49896    NaN49939    NaN49946    NaN49991    NaNName: CONTACTLASTNAME, Length: 2500, dtype: str"
+            },
+            {
+                "schema": null,
+                "column": "CONTACTFIRSTNAME",
+                "check": "not_nullable",
+                "error": "non-nullable series 'CONTACTFIRSTNAME' contains null values:48       NaN49       NaN52       NaN60       NaN75       NaN        ... 49928    NaN49946    NaN49971    NaN49978    NaN49994    NaNName: CONTACTFIRSTNAME, Length: 2500, dtype: str"
+            }
+        ],
+        "WRONG_DATATYPE": [
+            {
+                "schema": null,
+                "column": "POSTALCODE",
+                "check": "dtype('int64')",
+                "error": "expected series 'POSTALCODE' to have type int64, got float64"
+            }
+        ]
+    }
+}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2125, in _exec_insertmany_context
+    dialect.do_execute(
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "clean_data_pkey"
+DETAIL:  Key ("ORDERNUMBER")=(10000) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandas\io\sql.py", line 1679, in execute
+    return execute_function(sql, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1844, in _execute_context
+    return self._exec_insertmany_context(dialect, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2133, in _exec_insertmany_context
+    self._handle_dbapi_exception(
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2125, in _exec_insertmany_context
+    dialect.do_execute(
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "clean_data_pkey"
+DETAIL:  Key ("ORDERNUMBER")=(10000) already exists.
+
+[SQL: INSERT INTO clean_data ("ORDERNUMBER", "QUANTITYORDERED", "PRICEEACH", "ORDERLINENUMBER", "SALES", "ORDERDATE", "STATUS", "QTR_ID", "MONTH_ID", "YEAR_ID", "PRODUCTLINE", "MSRP", "PRODUCTCODE", "CUSTOMERNAME", "PHONE", "ADDRESSLINE1", "ADDRESSLINE2",  ... 506261 characters truncated ... __999)s, %(TERRITORY__999)s, %(CONTACTLASTNAME__999)s, %(CONTACTFIRSTNAME__999)s, %(DEALSIZE__999)s)]
+[parameters: {'PHONE__0': '+1-690-288-0001x040', 'CONTACTFIRSTNAME__0': 'Alexis', 'ADDRESSLINE1__0': '740 Ashley Rest', 'SALES__0': 4133.1, 'POSTALCODE__0': 97029.0, 'QUANTITYORDERED__0': 80, 'ADDRESSLINE2__0': None, 'MONTH_ID__0': 9, 'PRODUCTCODE__0': 'S16_2569', 'STATUS__0': 'On Hold', 'COUNTRY__0': 'Belize', 'ORDERNUMBER__0': 10000, 'PRODUCTLINE__0': 'Trains', 'QTR_ID__0': 3, 'PRICEEACH__0': 52.02, 'ORDERDATE__0': datetime.datetime(2003, 9, 14, 0, 0), 'CUSTOMERNAME__0': 'Bernard Group', 'ORDERLINENUMBER__0': 11, 'STATE__0': 'IN', 'DEALSIZE__0': 'Medium', 'TERRITORY__0': None, 'CONTACTLASTNAME__0': 'Perez', 'CITY__0': 'Lake Chadstad', 'YEAR_ID__0': 2003, 'MSRP__0': 75.0, 'PHONE__1': '979.710.9245', 'CONTACTFIRSTNAME__1': 'Nicholas', 'ADDRESSLINE1__1': '5622 Stephen Isle Apt. 927', 'SALES__1': 5646.23, 'POSTALCODE__1': 90792.0, 'QUANTITYORDERED__1': 70, 'ADDRESSLINE2__1': 'Apt. 776', 'MONTH_ID__1': 8, 'PRODUCTCODE__1': 'S85_7019', 'STATUS__1': 'Cancelled', 'COUNTRY__1': 'Malaysia', 'ORDERNUMBER__1': 10001, 'PRODUCTLINE__1': 'Trains', 'QTR_ID__1': 3, 'PRICEEACH__1': 83.3, 'ORDERDATE__1': datetime.datetime(2004, 8, 20, 0, 0), 'CUSTOMERNAME__1': 'Mitchell Inc', 'ORDERLINENUMBER__1': 3, 'STATE__1': None, 'DEALSIZE__1': 'Large', 'TERRITORY__1': 'APAC', 'CONTACTLASTNAME__1': 'Esparza', 'CITY__1': 'Candicechester', 'YEAR_ID__1': 2004, 'MSRP__1': 114.0 ... 24900 parameters truncated ... 'PHONE__998': '734-696-6404', 'CONTACTFIRSTNAME__998': 'Erica', 'ADDRESSLINE1__998': '215 Paul Locks Suite 059', 'SALES__998': 1671.77, 'POSTALCODE__998': 72715.0, 'QUANTITYORDERED__998': 18, 'ADDRESSLINE2__998': 'Apt. 007', 'MONTH_ID__998': 5, 'PRODUCTCODE__998': 'S76_3379', 'STATUS__998': 'Resolved', 'COUNTRY__998': 'Canada', 'ORDERNUMBER__998': 12657, 'PRODUCTLINE__998': 'Ships', 'QTR_ID__998': 2, 'PRICEEACH__998': 88.86, 'ORDERDATE__998': datetime.datetime(2004, 5, 21, 0, 0), 'CUSTOMERNAME__998': 'Merritt Ltd', 'ORDERLINENUMBER__998': 3, 'STATE__998': 'WV', 'DEALSIZE__998': 'Large', 'TERRITORY__998': None, 'CONTACTLASTNAME__998': 'Jones', 'CITY__998': 'Angelahaven', 'YEAR_ID__998': 2004, 'MSRP__998': 120.0, 'PHONE__999': '2225500747', 'CONTACTFIRSTNAME__999': 'Hunter', 'ADDRESSLINE1__999': '13474 Kelly Junction Suite 705', 'SALES__999': 3561.22, 'POSTALCODE__999': 14728.0, 'QUANTITYORDERED__999': 62, 'ADDRESSLINE2__999': None, 'MONTH_ID__999': 7, 'PRODUCTCODE__999': 'S60_3768', 'STATUS__999': 'Resolved', 'COUNTRY__999': 'Palau', 'ORDERNUMBER__999': 12660, 'PRODUCTLINE__999': 'Trains', 'QTR_ID__999': 3, 'PRICEEACH__999': 56.56, 'ORDERDATE__999': datetime.datetime(2004, 7, 15, 0, 0), 'CUSTOMERNAME__999': 'Lewis, Johnson and Sanchez', 'ORDERLINENUMBER__999': 4, 'STATE__999': 'GA', 'DEALSIZE__999': 'Medium', 'TERRITORY__999': None, 'CONTACTLASTNAME__999': 'Ford', 'CITY__999': 'Arnoldborough', 'YEAR_ID__999': 2004, 'MSRP__999': 96.0}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\DELL\Desktop\Db-Practice\src\main1.py", line 29, in log_exceptions_middleware
+    return await call_next(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\middleware\base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\fastapi\routing.py", line 119, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\fastapi\routing.py", line 105, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\fastapi\routing.py", line 431, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\fastapi\routing.py", line 313, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\src\main1.py", line 165, in upload_csv
+    clean_df.to_sql(
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandas\core\generic.py", line 3052, in to_sql
+    return sql.to_sql(
+           ^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandas\io\sql.py", line 841, in to_sql
+    return pandas_sql.to_sql(
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandas\io\sql.py", line 2037, in to_sql
+    total_inserted = sql_engine.insert_records(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandas\io\sql.py", line 1571, in insert_records
+    return table.insert(chunksize=chunksize, method=method)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandas\io\sql.py", line 1122, in insert
+    num_inserted = exec_insert(conn, keys, chunk_iter)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandas\io\sql.py", line 1014, in _execute_insert
+    result = self.pd_sql.execute(self.table.insert(), data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandas\io\sql.py", line 1681, in execute
+    raise DatabaseError(f"Execution failed on sql '{sql}': {exc}") from exc
+pandas.errors.DatabaseError: Execution failed on sql 'INSERT INTO clean_data ("ORDERNUMBER", "QUANTITYORDERED", "PRICEEACH", "ORDERLINENUMBER", "SALES", "ORDERDATE", "STATUS", "QTR_ID", "MONTH_ID", "YEAR_ID", "PRODUCTLINE", "MSRP", "PRODUCTCODE", "CUSTOMERNAME", "PHONE", "ADDRESSLINE1", "ADDRESSLINE2", "CITY", "STATE", "POSTALCODE", "COUNTRY", "TERRITORY", "CONTACTLASTNAME", "CONTACTFIRSTNAME", "DEALSIZE") VALUES (:ORDERNUMBER, :QUANTITYORDERED, :PRICEEACH, :ORDERLINENUMBER, :SALES, :ORDERDATE, :STATUS, :QTR_ID, :MONTH_ID, :YEAR_ID, :PRODUCTLINE, :MSRP, :PRODUCTCODE, :CUSTOMERNAME, :PHONE, :ADDRESSLINE1, :ADDRESSLINE2, :CITY, :STATE, :POSTALCODE, :COUNTRY, :TERRITORY, :CONTACTLASTNAME, :CONTACTFIRSTNAME, :DEALSIZE)': (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "clean_data_pkey"
+DETAIL:  Key ("ORDERNUMBER")=(10000) already exists.
+
+[SQL: INSERT INTO clean_data ("ORDERNUMBER", "QUANTITYORDERED", "PRICEEACH", "ORDERLINENUMBER", "SALES", "ORDERDATE", "STATUS", "QTR_ID", "MONTH_ID", "YEAR_ID", "PRODUCTLINE", "MSRP", "PRODUCTCODE", "CUSTOMERNAME", "PHONE", "ADDRESSLINE1", "ADDRESSLINE2",  ... 506261 characters truncated ... __999)s, %(TERRITORY__999)s, %(CONTACTLASTNAME__999)s, %(CONTACTFIRSTNAME__999)s, %(DEALSIZE__999)s)]
+[parameters: {'PHONE__0': '+1-690-288-0001x040', 'CONTACTFIRSTNAME__0': 'Alexis', 'ADDRESSLINE1__0': '740 Ashley Rest', 'SALES__0': 4133.1, 'POSTALCODE__0': 97029.0, 'QUANTITYORDERED__0': 80, 'ADDRESSLINE2__0': None, 'MONTH_ID__0': 9, 'PRODUCTCODE__0': 'S16_2569', 'STATUS__0': 'On Hold', 'COUNTRY__0': 'Belize', 'ORDERNUMBER__0': 10000, 'PRODUCTLINE__0': 'Trains', 'QTR_ID__0': 3, 'PRICEEACH__0': 52.02, 'ORDERDATE__0': datetime.datetime(2003, 9, 14, 0, 0), 'CUSTOMERNAME__0': 'Bernard Group', 'ORDERLINENUMBER__0': 11, 'STATE__0': 'IN', 'DEALSIZE__0': 'Medium', 'TERRITORY__0': None, 'CONTACTLASTNAME__0': 'Perez', 'CITY__0': 'Lake Chadstad', 'YEAR_ID__0': 2003, 'MSRP__0': 75.0, 'PHONE__1': '979.710.9245', 'CONTACTFIRSTNAME__1': 'Nicholas', 'ADDRESSLINE1__1': '5622 Stephen Isle Apt. 927', 'SALES__1': 5646.23, 'POSTALCODE__1': 90792.0, 'QUANTITYORDERED__1': 70, 'ADDRESSLINE2__1': 'Apt. 776', 'MONTH_ID__1': 8, 'PRODUCTCODE__1': 'S85_7019', 'STATUS__1': 'Cancelled', 'COUNTRY__1': 'Malaysia', 'ORDERNUMBER__1': 10001, 'PRODUCTLINE__1': 'Trains', 'QTR_ID__1': 3, 'PRICEEACH__1': 83.3, 'ORDERDATE__1': datetime.datetime(2004, 8, 20, 0, 0), 'CUSTOMERNAME__1': 'Mitchell Inc', 'ORDERLINENUMBER__1': 3, 'STATE__1': None, 'DEALSIZE__1': 'Large', 'TERRITORY__1': 'APAC', 'CONTACTLASTNAME__1': 'Esparza', 'CITY__1': 'Candicechester', 'YEAR_ID__1': 2004, 'MSRP__1': 114.0 ... 24900 parameters truncated ... 'PHONE__998': '734-696-6404', 'CONTACTFIRSTNAME__998': 'Erica', 'ADDRESSLINE1__998': '215 Paul Locks Suite 059', 'SALES__998': 1671.77, 'POSTALCODE__998': 72715.0, 'QUANTITYORDERED__998': 18, 'ADDRESSLINE2__998': 'Apt. 007', 'MONTH_ID__998': 5, 'PRODUCTCODE__998': 'S76_3379', 'STATUS__998': 'Resolved', 'COUNTRY__998': 'Canada', 'ORDERNUMBER__998': 12657, 'PRODUCTLINE__998': 'Ships', 'QTR_ID__998': 2, 'PRICEEACH__998': 88.86, 'ORDERDATE__998': datetime.datetime(2004, 5, 21, 0, 0), 'CUSTOMERNAME__998': 'Merritt Ltd', 'ORDERLINENUMBER__998': 3, 'STATE__998': 'WV', 'DEALSIZE__998': 'Large', 'TERRITORY__998': None, 'CONTACTLASTNAME__998': 'Jones', 'CITY__998': 'Angelahaven', 'YEAR_ID__998': 2004, 'MSRP__998': 120.0, 'PHONE__999': '2225500747', 'CONTACTFIRSTNAME__999': 'Hunter', 'ADDRESSLINE1__999': '13474 Kelly Junction Suite 705', 'SALES__999': 3561.22, 'POSTALCODE__999': 14728.0, 'QUANTITYORDERED__999': 62, 'ADDRESSLINE2__999': None, 'MONTH_ID__999': 7, 'PRODUCTCODE__999': 'S60_3768', 'STATUS__999': 'Resolved', 'COUNTRY__999': 'Palau', 'ORDERNUMBER__999': 12660, 'PRODUCTLINE__999': 'Trains', 'QTR_ID__999': 3, 'PRICEEACH__999': 56.56, 'ORDERDATE__999': datetime.datetime(2004, 7, 15, 0, 0), 'CUSTOMERNAME__999': 'Lewis, Johnson and Sanchez', 'ORDERLINENUMBER__999': 4, 'STATE__999': 'GA', 'DEALSIZE__999': 'Medium', 'TERRITORY__999': None, 'CONTACTLASTNAME__999': 'Ford', 'CITY__999': 'Arnoldborough', 'YEAR_ID__999': 2004, 'MSRP__999': 96.0}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+
+2026-03-11 16:20:09,072 - root - ERROR - Error handling request http://127.0.0.1:8000/upload-csv: Traceback (most recent call last):
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2125, in _exec_insertmany_context
+    dialect.do_execute(
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "clean_data_pkey"
+DETAIL:  Key ("ORDERNUMBER")=(10000) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandas\io\sql.py", line 1679, in execute
+    return execute_function(sql, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1844, in _execute_context
+    return self._exec_insertmany_context(dialect, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2133, in _exec_insertmany_context
+    self._handle_dbapi_exception(
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2125, in _exec_insertmany_context
+    dialect.do_execute(
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "clean_data_pkey"
+DETAIL:  Key ("ORDERNUMBER")=(10000) already exists.
+
+[SQL: INSERT INTO clean_data ("ORDERNUMBER", "QUANTITYORDERED", "PRICEEACH", "ORDERLINENUMBER", "SALES", "ORDERDATE", "STATUS", "QTR_ID", "MONTH_ID", "YEAR_ID", "PRODUCTLINE", "MSRP", "PRODUCTCODE", "CUSTOMERNAME", "PHONE", "ADDRESSLINE1", "ADDRESSLINE2",  ... 506261 characters truncated ... __999)s, %(TERRITORY__999)s, %(CONTACTLASTNAME__999)s, %(CONTACTFIRSTNAME__999)s, %(DEALSIZE__999)s)]
+[parameters: {'PHONE__0': '778-737-1685x512', 'CONTACTFIRSTNAME__0': 'Jenna', 'ADDRESSLINE1__0': '36446 Ramsey Ridge Apt. 948', 'SALES__0': 8347.22, 'POSTALCODE__0': 86878, 'QUANTITYORDERED__0': 88, 'ADDRESSLINE2__0': None, 'MONTH_ID__0': 5, 'PRODUCTCODE__0': 'S18_7930', 'STATUS__0': 'On Hold', 'COUNTRY__0': 'Denmark', 'ORDERNUMBER__0': 10000, 'PRODUCTLINE__0': 'Ships', 'QTR_ID__0': 2, 'PRICEEACH__0': 94.52, 'ORDERDATE__0': datetime.datetime(2003, 5, 19, 0, 0), 'CUSTOMERNAME__0': 'Massey-Hanna', 'ORDERLINENUMBER__0': 12, 'STATE__0': 'DC', 'DEALSIZE__0': 'Large', 'TERRITORY__0': None, 'CONTACTLASTNAME__0': 'Salinas', 'CITY__0': 'Lake David', 'YEAR_ID__0': 2003, 'MSRP__0': 97.61543896737004, 'PHONE__1': '001-676-426-7621x98176', 'CONTACTFIRSTNAME__1': 'Caleb', 'ADDRESSLINE1__1': '71519 Melissa Trafficway Apt. 468', 'SALES__1': 7117.67, 'POSTALCODE__1': 9421, 'QUANTITYORDERED__1': 84, 'ADDRESSLINE2__1': 'Apt. 869', 'MONTH_ID__1': 12, 'PRODUCTCODE__1': 'S85_7333', 'STATUS__1': 'Resolved', 'COUNTRY__1': 'Trinidad and Tobago', 'ORDERNUMBER__1': 10001, 'PRODUCTLINE__1': 'Classic Cars', 'QTR_ID__1': 4, 'PRICEEACH__1': 87.04, 'ORDERDATE__1': datetime.datetime(2004, 12, 24, 0, 0), 'CUSTOMERNAME__1': 'Jones Inc', 'ORDERLINENUMBER__1': 15, 'STATE__1': 'WA', 'DEALSIZE__1': 'Medium', 'TERRITORY__1': None, 'CONTACTLASTNAME__1': 'Morris', 'CITY__1': 'West Jonathanshire', 'YEAR_ID__1': 2004, 'MSRP__1': 82.70673786664273 ... 24900 parameters truncated ... 'PHONE__998': '352-780-5647', 'CONTACTFIRSTNAME__998': 'Patricia', 'ADDRESSLINE1__998': '512 Jeremy Ridges Suite 590', 'SALES__998': 2630.19, 'POSTALCODE__998': 49742, 'QUANTITYORDERED__998': 31, 'ADDRESSLINE2__998': None, 'MONTH_ID__998': 1, 'PRODUCTCODE__998': 'S23_8381', 'STATUS__998': 'Shipped', 'COUNTRY__998': 'Puerto Rico', 'ORDERNUMBER__998': 10998, 'PRODUCTLINE__998': 'Trains', 'QTR_ID__998': 1, 'PRICEEACH__998': 88.24, 'ORDERDATE__998': datetime.datetime(2004, 1, 14, 0, 0), 'CUSTOMERNAME__998': 'Chen, Williams and Osborn', 'ORDERLINENUMBER__998': 12, 'STATE__998': 'NV', 'DEALSIZE__998': 'Small', 'TERRITORY__998': 'APAC', 'CONTACTLASTNAME__998': 'Green', 'CITY__998': 'New Steven', 'YEAR_ID__998': 2004, 'MSRP__998': 84.73845145020822, 'PHONE__999': '001-457-326-4417', 'CONTACTFIRSTNAME__999': 'Susan', 'ADDRESSLINE1__999': '84315 Jose Circles Apt. 707', 'SALES__999': 4463.82, 'POSTALCODE__999': 97282, 'QUANTITYORDERED__999': 43, 'ADDRESSLINE2__999': None, 'MONTH_ID__999': 2, 'PRODUCTCODE__999': 'S10_1496', 'STATUS__999': 'Resolved', 'COUNTRY__999': 'Bolivia', 'ORDERNUMBER__999': 10999, 'PRODUCTLINE__999': 'Ships', 'QTR_ID__999': 1, 'PRICEEACH__999': 100.57, 'ORDERDATE__999': datetime.datetime(2003, 2, 5, 0, 0), 'CUSTOMERNAME__999': 'Cole, Miller and Young', 'ORDERLINENUMBER__999': 12, 'STATE__999': 'ME', 'DEALSIZE__999': 'Small', 'TERRITORY__999': None, 'CONTACTLASTNAME__999': 'Duncan', 'CITY__999': 'West Marie', 'YEAR_ID__999': 2003, 'MSRP__999': 73.86776341397152}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\DELL\Desktop\Db-Practice\src\main1.py", line 29, in log_exceptions_middleware
+    return await call_next(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\middleware\base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\fastapi\routing.py", line 119, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\fastapi\routing.py", line 105, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\fastapi\routing.py", line 431, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\fastapi\routing.py", line 313, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\src\main1.py", line 112, in upload_csv
+    # Initial validation to separate clean/faulty
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandas\core\generic.py", line 3052, in to_sql
+    return sql.to_sql(
+           ^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandas\io\sql.py", line 841, in to_sql
+    return pandas_sql.to_sql(
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandas\io\sql.py", line 2037, in to_sql
+    total_inserted = sql_engine.insert_records(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandas\io\sql.py", line 1571, in insert_records
+    return table.insert(chunksize=chunksize, method=method)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandas\io\sql.py", line 1122, in insert
+    num_inserted = exec_insert(conn, keys, chunk_iter)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandas\io\sql.py", line 1014, in _execute_insert
+    result = self.pd_sql.execute(self.table.insert(), data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandas\io\sql.py", line 1681, in execute
+    raise DatabaseError(f"Execution failed on sql '{sql}': {exc}") from exc
+pandas.errors.DatabaseError: Execution failed on sql 'INSERT INTO clean_data ("ORDERNUMBER", "QUANTITYORDERED", "PRICEEACH", "ORDERLINENUMBER", "SALES", "ORDERDATE", "STATUS", "QTR_ID", "MONTH_ID", "YEAR_ID", "PRODUCTLINE", "MSRP", "PRODUCTCODE", "CUSTOMERNAME", "PHONE", "ADDRESSLINE1", "ADDRESSLINE2", "CITY", "STATE", "POSTALCODE", "COUNTRY", "TERRITORY", "CONTACTLASTNAME", "CONTACTFIRSTNAME", "DEALSIZE") VALUES (:ORDERNUMBER, :QUANTITYORDERED, :PRICEEACH, :ORDERLINENUMBER, :SALES, :ORDERDATE, :STATUS, :QTR_ID, :MONTH_ID, :YEAR_ID, :PRODUCTLINE, :MSRP, :PRODUCTCODE, :CUSTOMERNAME, :PHONE, :ADDRESSLINE1, :ADDRESSLINE2, :CITY, :STATE, :POSTALCODE, :COUNTRY, :TERRITORY, :CONTACTLASTNAME, :CONTACTFIRSTNAME, :DEALSIZE)': (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "clean_data_pkey"
+DETAIL:  Key ("ORDERNUMBER")=(10000) already exists.
+
+[SQL: INSERT INTO clean_data ("ORDERNUMBER", "QUANTITYORDERED", "PRICEEACH", "ORDERLINENUMBER", "SALES", "ORDERDATE", "STATUS", "QTR_ID", "MONTH_ID", "YEAR_ID", "PRODUCTLINE", "MSRP", "PRODUCTCODE", "CUSTOMERNAME", "PHONE", "ADDRESSLINE1", "ADDRESSLINE2",  ... 506261 characters truncated ... __999)s, %(TERRITORY__999)s, %(CONTACTLASTNAME__999)s, %(CONTACTFIRSTNAME__999)s, %(DEALSIZE__999)s)]
+[parameters: {'PHONE__0': '778-737-1685x512', 'CONTACTFIRSTNAME__0': 'Jenna', 'ADDRESSLINE1__0': '36446 Ramsey Ridge Apt. 948', 'SALES__0': 8347.22, 'POSTALCODE__0': 86878, 'QUANTITYORDERED__0': 88, 'ADDRESSLINE2__0': None, 'MONTH_ID__0': 5, 'PRODUCTCODE__0': 'S18_7930', 'STATUS__0': 'On Hold', 'COUNTRY__0': 'Denmark', 'ORDERNUMBER__0': 10000, 'PRODUCTLINE__0': 'Ships', 'QTR_ID__0': 2, 'PRICEEACH__0': 94.52, 'ORDERDATE__0': datetime.datetime(2003, 5, 19, 0, 0), 'CUSTOMERNAME__0': 'Massey-Hanna', 'ORDERLINENUMBER__0': 12, 'STATE__0': 'DC', 'DEALSIZE__0': 'Large', 'TERRITORY__0': None, 'CONTACTLASTNAME__0': 'Salinas', 'CITY__0': 'Lake David', 'YEAR_ID__0': 2003, 'MSRP__0': 97.61543896737004, 'PHONE__1': '001-676-426-7621x98176', 'CONTACTFIRSTNAME__1': 'Caleb', 'ADDRESSLINE1__1': '71519 Melissa Trafficway Apt. 468', 'SALES__1': 7117.67, 'POSTALCODE__1': 9421, 'QUANTITYORDERED__1': 84, 'ADDRESSLINE2__1': 'Apt. 869', 'MONTH_ID__1': 12, 'PRODUCTCODE__1': 'S85_7333', 'STATUS__1': 'Resolved', 'COUNTRY__1': 'Trinidad and Tobago', 'ORDERNUMBER__1': 10001, 'PRODUCTLINE__1': 'Classic Cars', 'QTR_ID__1': 4, 'PRICEEACH__1': 87.04, 'ORDERDATE__1': datetime.datetime(2004, 12, 24, 0, 0), 'CUSTOMERNAME__1': 'Jones Inc', 'ORDERLINENUMBER__1': 15, 'STATE__1': 'WA', 'DEALSIZE__1': 'Medium', 'TERRITORY__1': None, 'CONTACTLASTNAME__1': 'Morris', 'CITY__1': 'West Jonathanshire', 'YEAR_ID__1': 2004, 'MSRP__1': 82.70673786664273 ... 24900 parameters truncated ... 'PHONE__998': '352-780-5647', 'CONTACTFIRSTNAME__998': 'Patricia', 'ADDRESSLINE1__998': '512 Jeremy Ridges Suite 590', 'SALES__998': 2630.19, 'POSTALCODE__998': 49742, 'QUANTITYORDERED__998': 31, 'ADDRESSLINE2__998': None, 'MONTH_ID__998': 1, 'PRODUCTCODE__998': 'S23_8381', 'STATUS__998': 'Shipped', 'COUNTRY__998': 'Puerto Rico', 'ORDERNUMBER__998': 10998, 'PRODUCTLINE__998': 'Trains', 'QTR_ID__998': 1, 'PRICEEACH__998': 88.24, 'ORDERDATE__998': datetime.datetime(2004, 1, 14, 0, 0), 'CUSTOMERNAME__998': 'Chen, Williams and Osborn', 'ORDERLINENUMBER__998': 12, 'STATE__998': 'NV', 'DEALSIZE__998': 'Small', 'TERRITORY__998': 'APAC', 'CONTACTLASTNAME__998': 'Green', 'CITY__998': 'New Steven', 'YEAR_ID__998': 2004, 'MSRP__998': 84.73845145020822, 'PHONE__999': '001-457-326-4417', 'CONTACTFIRSTNAME__999': 'Susan', 'ADDRESSLINE1__999': '84315 Jose Circles Apt. 707', 'SALES__999': 4463.82, 'POSTALCODE__999': 97282, 'QUANTITYORDERED__999': 43, 'ADDRESSLINE2__999': None, 'MONTH_ID__999': 2, 'PRODUCTCODE__999': 'S10_1496', 'STATUS__999': 'Resolved', 'COUNTRY__999': 'Bolivia', 'ORDERNUMBER__999': 10999, 'PRODUCTLINE__999': 'Ships', 'QTR_ID__999': 1, 'PRICEEACH__999': 100.57, 'ORDERDATE__999': datetime.datetime(2003, 2, 5, 0, 0), 'CUSTOMERNAME__999': 'Cole, Miller and Young', 'ORDERLINENUMBER__999': 12, 'STATE__999': 'ME', 'DEALSIZE__999': 'Small', 'TERRITORY__999': None, 'CONTACTLASTNAME__999': 'Duncan', 'CITY__999': 'West Marie', 'YEAR_ID__999': 2003, 'MSRP__999': 73.86776341397152}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+
+2026-03-11 16:22:46,182 - root - ERROR - Error handling request http://127.0.0.1:8000/upload-csv: Traceback (most recent call last):
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2125, in _exec_insertmany_context
+    dialect.do_execute(
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "clean_data_pkey"
+DETAIL:  Key ("ORDERNUMBER")=(30005) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandas\io\sql.py", line 1679, in execute
+    return execute_function(sql, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\sqlalchemy\sql\elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 1844, in _execute_context
+    return self._exec_insertmany_context(dialect, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2133, in _exec_insertmany_context
+    self._handle_dbapi_exception(
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\sqlalchemy\engine\base.py", line 2125, in _exec_insertmany_context
+    dialect.do_execute(
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.IntegrityError: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "clean_data_pkey"
+DETAIL:  Key ("ORDERNUMBER")=(30005) already exists.
+
+[SQL: INSERT INTO clean_data ("ORDERNUMBER", "QUANTITYORDERED", "PRICEEACH", "ORDERLINENUMBER", "SALES", "ORDERDATE", "STATUS", "QTR_ID", "MONTH_ID", "YEAR_ID", "PRODUCTLINE", "MSRP", "PRODUCTCODE", "CUSTOMERNAME", "PHONE", "ADDRESSLINE1", "ADDRESSLINE2",  ... 506261 characters truncated ... __999)s, %(TERRITORY__999)s, %(CONTACTLASTNAME__999)s, %(CONTACTFIRSTNAME__999)s, %(DEALSIZE__999)s)]
+[parameters: {'PHONE__0': '263.727.0375x6033', 'CONTACTFIRSTNAME__0': 'Alec', 'ADDRESSLINE1__0': '465 White Cliffs', 'SALES__0': 3702.19, 'POSTALCODE__0': 14566, 'QUANTITYORDERED__0': 45, 'ADDRESSLINE2__0': None, 'MONTH_ID__0': 10, 'PRODUCTCODE__0': 'S31_8593', 'STATUS__0': 'On Hold', 'COUNTRY__0': 'Japan', 'ORDERNUMBER__0': 30000, 'PRODUCTLINE__0': 'Planes', 'QTR_ID__0': 4, 'PRICEEACH__0': 78.64, 'ORDERDATE__0': datetime.datetime(2004, 10, 21, 0, 0), 'CUSTOMERNAME__0': 'Brown, Vazquez and Miles', 'ORDERLINENUMBER__0': 6, 'STATE__0': 'MD', 'DEALSIZE__0': 'Small', 'TERRITORY__0': None, 'CONTACTLASTNAME__0': 'Riley', 'CITY__0': 'North Nicoleberg', 'YEAR_ID__0': 2004, 'MSRP__0': 119.32020629737274, 'PHONE__1': '+1-273-988-5171x407', 'CONTACTFIRSTNAME__1': 'Joseph', 'ADDRESSLINE1__1': '6565 Tiffany Junction', 'SALES__1': 8881.69, 'POSTALCODE__1': 9492, 'QUANTITYORDERED__1': 79, 'ADDRESSLINE2__1': None, 'MONTH_ID__1': 11, 'PRODUCTCODE__1': 'S41_2788', 'STATUS__1': 'Shipped', 'COUNTRY__1': 'French Guiana', 'ORDERNUMBER__1': 30001, 'PRODUCTLINE__1': 'Ships', 'QTR_ID__1': 4, 'PRICEEACH__1': 107.29, 'ORDERDATE__1': datetime.datetime(2005, 11, 2, 0, 0), 'CUSTOMERNAME__1': 'Cooper-Padilla', 'ORDERLINENUMBER__1': 2, 'STATE__1': 'MP', 'DEALSIZE__1': 'Medium', 'TERRITORY__1': 'EMEA', 'CONTACTLASTNAME__1': 'Campbell', 'CITY__1': 'Williamborough', 'YEAR_ID__1': 2005, 'MSRP__1': 101.3950557800102 ... 24900 parameters truncated ... 'PHONE__998': '902.508.4012x03720', 'CONTACTFIRSTNAME__998': 'Kari', 'ADDRESSLINE1__998': '34532 Preston Village Apt. 575', 'SALES__998': 9790.6, 'POSTALCODE__998': 33692, 'QUANTITYORDERED__998': 89, 'ADDRESSLINE2__998': None, 'MONTH_ID__998': 2, 'PRODUCTCODE__998': 'S35_9766', 'STATUS__998': 'Shipped', 'COUNTRY__998': 'Brunei Darussalam', 'ORDERNUMBER__998': 30998, 'PRODUCTLINE__998': 'Ships', 'QTR_ID__998': 1, 'PRICEEACH__998': 114.04, 'ORDERDATE__998': datetime.datetime(2003, 2, 11, 0, 0), 'CUSTOMERNAME__998': 'Griffith Inc', 'ORDERLINENUMBER__998': 2, 'STATE__998': 'GU', 'DEALSIZE__998': 'Small', 'TERRITORY__998': 'APAC', 'CONTACTLASTNAME__998': 'Mejia', 'CITY__998': 'Wandaport', 'YEAR_ID__998': 2003, 'MSRP__998': 83.83501472094083, 'PHONE__999': '753.645.5923', 'CONTACTFIRSTNAME__999': 'Benjamin', 'ADDRESSLINE1__999': '22619 Silva Coves', 'SALES__999': 4081.35, 'POSTALCODE__999': 73230, 'QUANTITYORDERED__999': 56, 'ADDRESSLINE2__999': 'Apt. 843', 'MONTH_ID__999': 7, 'PRODUCTCODE__999': 'S60_8438', 'STATUS__999': 'Shipped', 'COUNTRY__999': 'Monaco', 'ORDERNUMBER__999': 30999, 'PRODUCTLINE__999': 'Motorcycles', 'QTR_ID__999': 3, 'PRICEEACH__999': 70.35, 'ORDERDATE__999': datetime.datetime(2004, 7, 28, 0, 0), 'CUSTOMERNAME__999': 'Garcia, Mitchell and Adams', 'ORDERLINENUMBER__999': 6, 'STATE__999': 'HI', 'DEALSIZE__999': 'Small', 'TERRITORY__999': None, 'CONTACTLASTNAME__999': 'Hebert', 'CITY__999': 'West Carlosland', 'YEAR_ID__999': 2004, 'MSRP__999': 112.3003273720098}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\DELL\Desktop\Db-Practice\src\main1.py", line 29, in log_exceptions_middleware
+    return await call_next(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\middleware\base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\fastapi\routing.py", line 119, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\fastapi\routing.py", line 105, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\fastapi\routing.py", line 431, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\fastapi\routing.py", line 313, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\src\main1.py", line 112, in upload_csv
+    # Initial validation to separate clean/faulty
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandas\core\generic.py", line 3052, in to_sql
+    return sql.to_sql(
+           ^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandas\io\sql.py", line 841, in to_sql
+    return pandas_sql.to_sql(
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandas\io\sql.py", line 2037, in to_sql
+    total_inserted = sql_engine.insert_records(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandas\io\sql.py", line 1571, in insert_records
+    return table.insert(chunksize=chunksize, method=method)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandas\io\sql.py", line 1122, in insert
+    num_inserted = exec_insert(conn, keys, chunk_iter)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandas\io\sql.py", line 1014, in _execute_insert
+    result = self.pd_sql.execute(self.table.insert(), data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandas\io\sql.py", line 1681, in execute
+    raise DatabaseError(f"Execution failed on sql '{sql}': {exc}") from exc
+pandas.errors.DatabaseError: Execution failed on sql 'INSERT INTO clean_data ("ORDERNUMBER", "QUANTITYORDERED", "PRICEEACH", "ORDERLINENUMBER", "SALES", "ORDERDATE", "STATUS", "QTR_ID", "MONTH_ID", "YEAR_ID", "PRODUCTLINE", "MSRP", "PRODUCTCODE", "CUSTOMERNAME", "PHONE", "ADDRESSLINE1", "ADDRESSLINE2", "CITY", "STATE", "POSTALCODE", "COUNTRY", "TERRITORY", "CONTACTLASTNAME", "CONTACTFIRSTNAME", "DEALSIZE") VALUES (:ORDERNUMBER, :QUANTITYORDERED, :PRICEEACH, :ORDERLINENUMBER, :SALES, :ORDERDATE, :STATUS, :QTR_ID, :MONTH_ID, :YEAR_ID, :PRODUCTLINE, :MSRP, :PRODUCTCODE, :CUSTOMERNAME, :PHONE, :ADDRESSLINE1, :ADDRESSLINE2, :CITY, :STATE, :POSTALCODE, :COUNTRY, :TERRITORY, :CONTACTLASTNAME, :CONTACTFIRSTNAME, :DEALSIZE)': (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "clean_data_pkey"
+DETAIL:  Key ("ORDERNUMBER")=(30005) already exists.
+
+[SQL: INSERT INTO clean_data ("ORDERNUMBER", "QUANTITYORDERED", "PRICEEACH", "ORDERLINENUMBER", "SALES", "ORDERDATE", "STATUS", "QTR_ID", "MONTH_ID", "YEAR_ID", "PRODUCTLINE", "MSRP", "PRODUCTCODE", "CUSTOMERNAME", "PHONE", "ADDRESSLINE1", "ADDRESSLINE2",  ... 506261 characters truncated ... __999)s, %(TERRITORY__999)s, %(CONTACTLASTNAME__999)s, %(CONTACTFIRSTNAME__999)s, %(DEALSIZE__999)s)]
+[parameters: {'PHONE__0': '263.727.0375x6033', 'CONTACTFIRSTNAME__0': 'Alec', 'ADDRESSLINE1__0': '465 White Cliffs', 'SALES__0': 3702.19, 'POSTALCODE__0': 14566, 'QUANTITYORDERED__0': 45, 'ADDRESSLINE2__0': None, 'MONTH_ID__0': 10, 'PRODUCTCODE__0': 'S31_8593', 'STATUS__0': 'On Hold', 'COUNTRY__0': 'Japan', 'ORDERNUMBER__0': 30000, 'PRODUCTLINE__0': 'Planes', 'QTR_ID__0': 4, 'PRICEEACH__0': 78.64, 'ORDERDATE__0': datetime.datetime(2004, 10, 21, 0, 0), 'CUSTOMERNAME__0': 'Brown, Vazquez and Miles', 'ORDERLINENUMBER__0': 6, 'STATE__0': 'MD', 'DEALSIZE__0': 'Small', 'TERRITORY__0': None, 'CONTACTLASTNAME__0': 'Riley', 'CITY__0': 'North Nicoleberg', 'YEAR_ID__0': 2004, 'MSRP__0': 119.32020629737274, 'PHONE__1': '+1-273-988-5171x407', 'CONTACTFIRSTNAME__1': 'Joseph', 'ADDRESSLINE1__1': '6565 Tiffany Junction', 'SALES__1': 8881.69, 'POSTALCODE__1': 9492, 'QUANTITYORDERED__1': 79, 'ADDRESSLINE2__1': None, 'MONTH_ID__1': 11, 'PRODUCTCODE__1': 'S41_2788', 'STATUS__1': 'Shipped', 'COUNTRY__1': 'French Guiana', 'ORDERNUMBER__1': 30001, 'PRODUCTLINE__1': 'Ships', 'QTR_ID__1': 4, 'PRICEEACH__1': 107.29, 'ORDERDATE__1': datetime.datetime(2005, 11, 2, 0, 0), 'CUSTOMERNAME__1': 'Cooper-Padilla', 'ORDERLINENUMBER__1': 2, 'STATE__1': 'MP', 'DEALSIZE__1': 'Medium', 'TERRITORY__1': 'EMEA', 'CONTACTLASTNAME__1': 'Campbell', 'CITY__1': 'Williamborough', 'YEAR_ID__1': 2005, 'MSRP__1': 101.3950557800102 ... 24900 parameters truncated ... 'PHONE__998': '902.508.4012x03720', 'CONTACTFIRSTNAME__998': 'Kari', 'ADDRESSLINE1__998': '34532 Preston Village Apt. 575', 'SALES__998': 9790.6, 'POSTALCODE__998': 33692, 'QUANTITYORDERED__998': 89, 'ADDRESSLINE2__998': None, 'MONTH_ID__998': 2, 'PRODUCTCODE__998': 'S35_9766', 'STATUS__998': 'Shipped', 'COUNTRY__998': 'Brunei Darussalam', 'ORDERNUMBER__998': 30998, 'PRODUCTLINE__998': 'Ships', 'QTR_ID__998': 1, 'PRICEEACH__998': 114.04, 'ORDERDATE__998': datetime.datetime(2003, 2, 11, 0, 0), 'CUSTOMERNAME__998': 'Griffith Inc', 'ORDERLINENUMBER__998': 2, 'STATE__998': 'GU', 'DEALSIZE__998': 'Small', 'TERRITORY__998': 'APAC', 'CONTACTLASTNAME__998': 'Mejia', 'CITY__998': 'Wandaport', 'YEAR_ID__998': 2003, 'MSRP__998': 83.83501472094083, 'PHONE__999': '753.645.5923', 'CONTACTFIRSTNAME__999': 'Benjamin', 'ADDRESSLINE1__999': '22619 Silva Coves', 'SALES__999': 4081.35, 'POSTALCODE__999': 73230, 'QUANTITYORDERED__999': 56, 'ADDRESSLINE2__999': 'Apt. 843', 'MONTH_ID__999': 7, 'PRODUCTCODE__999': 'S60_8438', 'STATUS__999': 'Shipped', 'COUNTRY__999': 'Monaco', 'ORDERNUMBER__999': 30999, 'PRODUCTLINE__999': 'Motorcycles', 'QTR_ID__999': 3, 'PRICEEACH__999': 70.35, 'ORDERDATE__999': datetime.datetime(2004, 7, 28, 0, 0), 'CUSTOMERNAME__999': 'Garcia, Mitchell and Adams', 'ORDERLINENUMBER__999': 6, 'STATE__999': 'HI', 'DEALSIZE__999': 'Small', 'TERRITORY__999': None, 'CONTACTLASTNAME__999': 'Hebert', 'CITY__999': 'West Carlosland', 'YEAR_ID__999': 2004, 'MSRP__999': 112.3003273720098}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+
+2026-03-12 10:37:12,453 - root - ERROR - Error handling request http://192.168.1.6:8000/upload-csv: Traceback (most recent call last):
+  File "C:\Users\DELL\Desktop\Db-Practice\src\main1.py", line 113, in upload_csv
+    validate_df = orders_schema.validate(df, lazy=True)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandera\api\pandas\container.py", line 117, in validate
+    return self._validate(
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandera\api\pandas\container.py", line 137, in _validate
+    return self.get_backend(check_obj).validate(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandera\backends\pandas\container.py", line 135, in validate
+    raise SchemaErrors(
+pandera.errors.SchemaErrors: {
+    "SCHEMA": {
+        "SERIES_CONTAINS_NULLS": [
+            {
+                "schema": null,
+                "column": "ORDERNUMBER",
+                "check": "not_nullable",
+                "error": "non-nullable series 'ORDERNUMBER' contains null values:2        <NA>8        <NA>65       <NA>95       <NA>119      <NA>         ... 49966    <NA>49967    <NA>49985    <NA>49995    <NA>49997    <NA>Name: ORDERNUMBER, Length: 2500, dtype: Int64"
+            }
+        ]
+    }
+}
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\DELL\Desktop\Db-Practice\src\main1.py", line 29, in log_exceptions_middleware
+    return await call_next(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\middleware\base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\fastapi\routing.py", line 119, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\fastapi\routing.py", line 105, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\fastapi\routing.py", line 431, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\fastapi\routing.py", line 313, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\Db-Practice\src\main1.py", line 205, in upload_csv
+    faulty_df.insert(0, "VALIDATION_ERRORS", error_descriptions)
+  File "C:\Users\DELL\Desktop\Db-Practice\venv\Lib\site-packages\pandas\core\frame.py", line 5621, in insert
+    raise ValueError(f"cannot insert {column}, already exists")
+ValueError: cannot insert VALIDATION_ERRORS, already exists
+
