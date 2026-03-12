@@ -4,6 +4,7 @@ __pycache__/
 *.pyo
 *.pyd
 *.so
+*.pyc
 
 # Virtual environment
 venv/
@@ -12,20 +13,45 @@ env/
 
 # Environment variables
 .env
+.env.*
 
-# CSV data files
+# Data files
 *.csv
+*.xlsx
+*.xls
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
 
 # Distribution / packaging
 dist/
 build/
 *.egg-info/
+*.egg
 
 # IDE
 .vscode/
 .idea/
+*.sublime-project
+*.sublime-workspace
 
 # Test / coverage
 .pytest_cache/
 .coverage
 htmlcov/
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Uploads / temp
+uploads/
+tmp/
+temp/
