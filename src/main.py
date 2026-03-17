@@ -3,15 +3,15 @@ from io import BytesIO
 from fastapi import FastAPI, UploadFile, HTTPException, Query, File
 import pandas as pd
 import pandera.pandas as pa
-from .database import engine, SessionLocal
+from .database import engine, SessionLocal, Base
 from sqlalchemy.orm import Session
 from .models import CleanData, FaultyData
+Base.metadata.create_all(bind=engine)
 from fastapi.responses import Response, StreamingResponse
 import io
 import traceback
 import logging
 from sqlalchemy import cast, String
-import logging
 from fastapi.middleware.cors import CORSMiddleware
 from . import schema as orders_schema_mod
 from .schema import orders_schema
