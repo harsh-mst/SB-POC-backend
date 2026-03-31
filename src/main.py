@@ -2,7 +2,7 @@ from fastapi import Depends
 from io import BytesIO
 from fastapi import FastAPI, UploadFile, HTTPException, Query, File
 import pandas as pd
-import pandera.pandas as pa
+import pandera as pa
 from .database import engine, SessionLocal, Base
 from sqlalchemy.orm import Session
 from .models import CleanData, FaultyData
@@ -15,6 +15,10 @@ from sqlalchemy import cast, String
 from fastapi.middleware.cors import CORSMiddleware
 from . import schema as orders_schema_mod
 from .schema import orders_schema
+import warnings
+from pandera.errors import SchemaErrors
+
+warnings.filterwarnings('ignore')
 
 # Configure logging to a file
 logging.basicConfig(
@@ -36,7 +40,7 @@ async def log_exceptions_middleware(request, call_next):
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173","*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -62,6 +66,10 @@ async def upload_csv(
     encoding: str = Query("latin1")):
 
     allowed_extensions = {".csv", ".xlsx", ".xls"}
+    # file_extension = file.filename.lower()[file.filename.rfind("."):]
+    if not file.filename:
+        raise HTTPException(status_code=400, detail="File must have a filename")
+
     file_extension = file.filename.lower()[file.filename.rfind("."):]
     
     if file_extension not in allowed_extensions:
@@ -152,7 +160,7 @@ async def upload_csv(
                 }
             )
 
-    except pa.errors.SchemaErrors as err:
+    except SchemaErrors as err:
         failure_cases = err.failure_cases
         
         # Group errors by row index
@@ -286,7 +294,7 @@ async def add_entry(entry: orders_schema_mod.OrderItemCreate, db: Session = Depe
             "data": data_dict
         }
         
-    except pa.errors.SchemaErrors as err:
+    except SchemaErrors as err:
         failure_cases = err.failure_cases
         error_msgs = []
         for _, row in failure_cases.iterrows():
@@ -335,7 +343,7 @@ async def edit_entry(order_number: int, entry: orders_schema_mod.OrderItemCreate
             "data": data_dict
         }
         
-    except pa.errors.SchemaErrors as err:
+    except SchemaErrors as err:
         failure_cases = err.failure_cases
         error_msgs = []
         for _, row in failure_cases.iterrows():
